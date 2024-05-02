@@ -1,16 +1,7 @@
 # edutech4_0
 
-A new Flutter project.
+Projeto desenvolvido para cumprimento da disciplina de fundamentos de programação aplicada no programa de pós-graduação em informática.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Este projeto tem como objetivo disponibilizar uma plataforma na qual seja possível realizar um teste vocacional focado no mapeamento e desenvolvimento de competencias.

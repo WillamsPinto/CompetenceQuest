@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "82897203705",
+    "project_id": "edu-tech4-0-idl0gh",
+    "storage_bucket": "edu-tech4-0-idl0gh.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:82897203705:android:ff6681022a59e21f8c4d28",
+        "android_client_info": {
+          "package_name": "com.mycompany.edutech40"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_yhTbbNmCFFKmjFCEefsQJ5BF39WJLTU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

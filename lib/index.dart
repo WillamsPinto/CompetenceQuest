@@ -13,3 +13,5 @@ export '/pages/fale_conosco_page/fale_conosco_page_widget.dart'
 export '/pages/cursos_page/cursos_page_widget.dart' show CursosPageWidget;
 export '/pages/competence_quest_page/competence_quest_page_widget.dart'
     show CompetenceQuestPageWidget;
+export '/pages/competence_quest_page_copy/competence_quest_page_copy_widget.dart'
+    show CompetenceQuestPageCopyWidget;

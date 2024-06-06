@@ -14,7 +14,11 @@ class CreateAccountPageModel extends FlutterFlowModel<CreateAccountPageWidget> {
   String? Function(BuildContext, String?)? nomeTextControllerValidator;
   String? _nomeTextControllerValidator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
-      return 'Field is required';
+      return 'Campo Obrigatório';
+    }
+
+    if (val.length < 2) {
+      return 'Requires at least 2 characters.';
     }
 
     return null;
@@ -26,7 +30,11 @@ class CreateAccountPageModel extends FlutterFlowModel<CreateAccountPageWidget> {
   String? Function(BuildContext, String?)? idadeTextControllerValidator;
   String? _idadeTextControllerValidator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
-      return 'Field is required';
+      return 'Campo Obrigatório';
+    }
+
+    if (val.length < 2) {
+      return 'Requires at least 2 characters.';
     }
 
     return null;
@@ -42,11 +50,11 @@ class CreateAccountPageModel extends FlutterFlowModel<CreateAccountPageWidget> {
   String? _emailAddressTextControllerValidator(
       BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
-      return 'Field is required';
+      return 'Campo Obrigatório';
     }
 
     if (!RegExp(kTextValidatorEmailRegex).hasMatch(val)) {
-      return 'Has to be a valid email address.';
+      return 'Email Inválido';
     }
     return null;
   }
@@ -58,7 +66,11 @@ class CreateAccountPageModel extends FlutterFlowModel<CreateAccountPageWidget> {
   String? Function(BuildContext, String?)? passwordTextControllerValidator;
   String? _passwordTextControllerValidator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
-      return 'Field is required';
+      return 'Campo Obrigatório';
+    }
+
+    if (val.length < 6) {
+      return 'Requires at least 6 characters.';
     }
 
     return null;
@@ -73,14 +85,15 @@ class CreateAccountPageModel extends FlutterFlowModel<CreateAccountPageWidget> {
   String? _confirmarpasswordTextControllerValidator(
       BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
-      return 'Field is required';
+      return 'Campo Obrigatório';
+    }
+
+    if (val.length < 6) {
+      return 'Requires at least 6 characters.';
     }
 
     return null;
   }
-
-  // State field(s) for Checkbox widget.
-  bool? checkboxValue;
 
   @override
   void initState(BuildContext context) {

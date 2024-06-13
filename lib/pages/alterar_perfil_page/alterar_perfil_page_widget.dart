@@ -1,5 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/components/confirma_atualizacao_perfil/confirma_atualizacao_perfil_widget.dart';
 import '/components/confirmar_pop_up_deletar_conta/confirmar_pop_up_deletar_conta_widget.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -401,44 +402,76 @@ class _AlterarPerfilPageWidgetState extends State<AlterarPerfilPageWidget> {
                                       ),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 140.0, 0.0, 16.0),
-                                    child: FFButtonWidget(
-                                      onPressed: () async {
-                                        await currentUserReference!
-                                            .update(createUserDetailsRecordData(
-                                          name: _model.nomeTextController.text,
-                                          age: int.tryParse(
-                                              _model.idadeTextController.text),
-                                          genre: _model.sexoValue,
-                                        ));
-                                      },
-                                      text: 'Atualizar',
-                                      options: FFButtonOptions(
-                                        width: 370.0,
-                                        height: 44.0,
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 0.0, 0.0),
-                                        iconPadding:
-                                            const EdgeInsetsDirectional.fromSTEB(
-                                                0.0, 0.0, 0.0, 0.0),
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
-                                        textStyle: FlutterFlowTheme.of(context)
-                                            .titleSmall
-                                            .override(
-                                              fontFamily: 'Readex Pro',
-                                              color: Colors.white,
-                                              letterSpacing: 0.0,
-                                            ),
-                                        elevation: 3.0,
-                                        borderSide: const BorderSide(
-                                          color: Colors.transparent,
-                                          width: 1.0,
+                                  Builder(
+                                    builder: (context) => Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 140.0, 0.0, 16.0),
+                                      child: FFButtonWidget(
+                                        onPressed: () async {
+                                          await currentUserReference!.update(
+                                              createUserDetailsRecordData(
+                                            name:
+                                                _model.nomeTextController.text,
+                                            age: int.tryParse(_model
+                                                .idadeTextController.text),
+                                            genre: _model.sexoValue,
+                                          ));
+                                          await showDialog(
+                                            context: context,
+                                            builder: (dialogContext) {
+                                              return Dialog(
+                                                elevation: 0,
+                                                insetPadding: EdgeInsets.zero,
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                alignment: const AlignmentDirectional(
+                                                        0.0, 0.0)
+                                                    .resolve(Directionality.of(
+                                                        context)),
+                                                child: GestureDetector(
+                                                  onTap: () => _model
+                                                          .unfocusNode
+                                                          .canRequestFocus
+                                                      ? FocusScope.of(context)
+                                                          .requestFocus(_model
+                                                              .unfocusNode)
+                                                      : FocusScope.of(context)
+                                                          .unfocus(),
+                                                  child:
+                                                      const ConfirmaAtualizacaoPerfilWidget(),
+                                                ),
+                                              );
+                                            },
+                                          ).then((value) => setState(() {}));
+                                        },
+                                        text: 'Atualizar',
+                                        options: FFButtonOptions(
+                                          width: 370.0,
+                                          height: 44.0,
+                                          padding:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 0.0, 0.0),
+                                          iconPadding:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 0.0, 0.0),
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
+                                          textStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .titleSmall
+                                                  .override(
+                                                    fontFamily: 'Readex Pro',
+                                                    color: Colors.white,
+                                                    letterSpacing: 0.0,
+                                                  ),
+                                          elevation: 3.0,
+                                          borderSide: const BorderSide(
+                                            color: Colors.transparent,
+                                            width: 1.0,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(12.0),
                                         ),
-                                        borderRadius:
-                                            BorderRadius.circular(12.0),
                                       ),
                                     ),
                                   ),
@@ -472,19 +505,6 @@ class _AlterarPerfilPageWidgetState extends State<AlterarPerfilPageWidget> {
                                             );
                                           },
                                         ).then((value) => setState(() {}));
-
-                                        await Future.wait([
-                                          Future(() async {
-                                            await alterarPerfilPageUserDetailsRecord!
-                                                .reference
-                                                .delete();
-                                          }),
-                                          Future(() async {
-                                            await containerCompetenceQuestRecord!
-                                                .reference
-                                                .delete();
-                                          }),
-                                        ]);
                                       },
                                       text: 'DELETAR CONTA',
                                       options: FFButtonOptions(

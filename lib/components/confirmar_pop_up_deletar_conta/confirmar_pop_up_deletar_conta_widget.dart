@@ -102,6 +102,7 @@ class _ConfirmarPopUpDeletarContaWidgetState
                   ),
                   FFButtonWidget(
                     onPressed: () async {
+                      await currentUserReference!.delete();
                       await authManager.deleteUser(context);
 
                       context.goNamedAuth('HomePage', context.mounted);

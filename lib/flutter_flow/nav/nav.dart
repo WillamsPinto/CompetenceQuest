@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '/backend/backend.dart';
+import '/backend/schema/structs/index.dart';
 
 import '/auth/base_auth_user_provider.dart';
 
@@ -96,14 +98,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'HomePage',
-          path: '/homePage',
-          requireAuth: true,
-          builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'HomePage')
-              : const HomePageWidget(),
-        ),
-        FFRoute(
           name: 'PerfilPage',
           path: '/perfilPage',
           requireAuth: true,
@@ -132,12 +126,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const FaleConoscoPageWidget(),
         ),
         FFRoute(
-          name: 'CursosPage',
-          path: '/cursosPage',
+          name: 'EstudosPage',
+          path: '/estudosPage',
           requireAuth: true,
           builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'CursosPage')
-              : const CursosPageWidget(),
+              ? const NavBarPage(initialPage: 'EstudosPage')
+              : const EstudosPageWidget(),
         ),
         FFRoute(
           name: 'CompetenceQuestPage',
@@ -146,10 +140,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const CompetenceQuestPageWidget(),
         ),
         FFRoute(
-          name: 'CompetenceQuestPageCopy',
-          path: '/competenceQuestPageCopy',
+          name: 'HomePage',
+          path: '/homePage',
           requireAuth: true,
-          builder: (context, params) => const CompetenceQuestPageCopyWidget(),
+          builder: (context, params) => params.isEmpty
+              ? const NavBarPage(initialPage: 'HomePage')
+              : const HomePageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -269,6 +265,7 @@ class FFParameters {
     ParamType type, {
     bool isList = false,
     List<String>? collectionNamePath,
+    StructBuilder<T>? structBuilder,
   }) {
     if (futureParamValues.containsKey(paramName)) {
       return futureParamValues[paramName];
@@ -287,6 +284,7 @@ class FFParameters {
       type,
       isList,
       collectionNamePath: collectionNamePath,
+      structBuilder: structBuilder,
     );
   }
 }

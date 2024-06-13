@@ -3,6 +3,7 @@ import '/components/confirmar_pop_up_sair/confirmar_pop_up_sair_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'perfil_page_model.dart';
 export 'perfil_page_model.dart';
@@ -78,21 +79,28 @@ class _PerfilPageWidgetState extends State<PerfilPageWidget> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(24.0),
-                            child: Image.network(
-                              'https://picsum.photos/seed/990/600',
-                              width: 100.0,
-                              height: 100.0,
-                              fit: BoxFit.cover,
-                              alignment: const Alignment(0.0, 0.0),
-                              errorBuilder: (context, error, stackTrace) =>
-                                  Image.asset(
-                                'assets/images/error_image.jpg',
+                          AuthUserStreamWidget(
+                            builder: (context) => ClipRRect(
+                              borderRadius: BorderRadius.circular(24.0),
+                              child: CachedNetworkImage(
+                                fadeInDuration: const Duration(milliseconds: 500),
+                                fadeOutDuration: const Duration(milliseconds: 500),
+                                imageUrl: valueOrDefault<String>(
+                                  currentUserPhoto,
+                                  'https://icons.veryicon.com/png/o/internet--web/prejudice/user-128.png',
+                                ),
                                 width: 100.0,
                                 height: 100.0,
                                 fit: BoxFit.cover,
                                 alignment: const Alignment(0.0, 0.0),
+                                errorWidget: (context, error, stackTrace) =>
+                                    Image.asset(
+                                  'assets/images/error_image.jpg',
+                                  width: 100.0,
+                                  height: 100.0,
+                                  fit: BoxFit.cover,
+                                  alignment: const Alignment(0.0, 0.0),
+                                ),
                               ),
                             ),
                           ),

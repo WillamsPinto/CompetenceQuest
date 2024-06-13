@@ -662,12 +662,18 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                             _model.nomeTextController.text,
                                         email: _model
                                             .emailAddressTextController.text,
+                                        image:
+                                            'https://picsum.photos/seed/986/600',
                                       ));
 
                                   await CompetenceQuestRecord.collection
                                       .doc()
                                       .set(createCompetenceQuestRecordData(
                                         foiRespondido: false,
+                                        currentQuestion: 1,
+                                        score: 0,
+                                        previousQuestion: 1,
+                                        nextQuestion: 2,
                                       ));
                                   await showDialog(
                                     context: context,

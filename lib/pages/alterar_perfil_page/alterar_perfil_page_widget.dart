@@ -1,5 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/backend/firebase_storage/storage.dart';
 import '/components/confirma_atualizacao_perfil/confirma_atualizacao_perfil_widget.dart';
 import '/components/confirmar_pop_up_deletar_conta/confirmar_pop_up_deletar_conta_widget.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
@@ -8,6 +9,8 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
+import '/flutter_flow/upload_data.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'alterar_perfil_page_model.dart';
 export 'alterar_perfil_page_model.dart';
@@ -167,13 +170,118 @@ class _AlterarPerfilPageWidgetState extends State<AlterarPerfilPageWidget> {
                                 mainAxisSize: MainAxisSize.max,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(24.0),
-                                    child: Image.network(
-                                      'https://picsum.photos/seed/311/600',
-                                      width: 100.0,
-                                      height: 100.0,
-                                      fit: BoxFit.cover,
+                                  AuthUserStreamWidget(
+                                    builder: (context) => ClipRRect(
+                                      borderRadius: BorderRadius.circular(24.0),
+                                      child: CachedNetworkImage(
+                                        fadeInDuration:
+                                            const Duration(milliseconds: 500),
+                                        fadeOutDuration:
+                                            const Duration(milliseconds: 500),
+                                        imageUrl: valueOrDefault<String>(
+                                          currentUserPhoto,
+                                          'https://icons.veryicon.com/png/o/internet--web/prejudice/user-128.png',
+                                        ),
+                                        width: 100.0,
+                                        height: 100.0,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 10.0, 0.0, 10.0),
+                                    child: FFButtonWidget(
+                                      onPressed: () async {
+                                        final selectedMedia =
+                                            await selectMediaWithSourceBottomSheet(
+                                          context: context,
+                                          allowPhoto: true,
+                                        );
+                                        if (selectedMedia != null &&
+                                            selectedMedia.every((m) =>
+                                                validateFileFormat(
+                                                    m.storagePath, context))) {
+                                          setState(() =>
+                                              _model.isDataUploading = true);
+                                          var selectedUploadedFiles =
+                                              <FFUploadedFile>[];
+
+                                          var downloadUrls = <String>[];
+                                          try {
+                                            selectedUploadedFiles =
+                                                selectedMedia
+                                                    .map((m) => FFUploadedFile(
+                                                          name: m.storagePath
+                                                              .split('/')
+                                                              .last,
+                                                          bytes: m.bytes,
+                                                          height: m.dimensions
+                                                              ?.height,
+                                                          width: m.dimensions
+                                                              ?.width,
+                                                          blurHash: m.blurHash,
+                                                        ))
+                                                    .toList();
+
+                                            downloadUrls = (await Future.wait(
+                                              selectedMedia.map(
+                                                (m) async => await uploadData(
+                                                    m.storagePath, m.bytes),
+                                              ),
+                                            ))
+                                                .where((u) => u != null)
+                                                .map((u) => u!)
+                                                .toList();
+                                          } finally {
+                                            _model.isDataUploading = false;
+                                          }
+                                          if (selectedUploadedFiles.length ==
+                                                  selectedMedia.length &&
+                                              downloadUrls.length ==
+                                                  selectedMedia.length) {
+                                            setState(() {
+                                              _model.uploadedLocalFile =
+                                                  selectedUploadedFiles.first;
+                                              _model.uploadedFileUrl =
+                                                  downloadUrls.first;
+                                            });
+                                          } else {
+                                            setState(() {});
+                                            return;
+                                          }
+                                        }
+
+                                        await currentUserReference!
+                                            .update(createUserDetailsRecordData(
+                                          photoUrl: _model.uploadedFileUrl,
+                                        ));
+                                      },
+                                      text: 'Alterar Imagem',
+                                      options: FFButtonOptions(
+                                        height: 30.0,
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            24.0, 0.0, 24.0, 0.0),
+                                        iconPadding:
+                                            const EdgeInsetsDirectional.fromSTEB(
+                                                0.0, 0.0, 0.0, 0.0),
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              letterSpacing: 0.0,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                        elevation: 3.0,
+                                        borderSide: const BorderSide(
+                                          color: Colors.transparent,
+                                          width: 1.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                      ),
                                     ),
                                   ),
                                   Padding(

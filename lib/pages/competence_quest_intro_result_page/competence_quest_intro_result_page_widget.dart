@@ -1,7 +1,10 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/flutter_flow/flutter_flow_charts.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/random_data_util.dart' as random_data;
 import 'package:flutter/material.dart';
 import 'competence_quest_intro_result_page_model.dart';
 export 'competence_quest_intro_result_page_model.dart';
@@ -96,48 +99,6 @@ class _CompetenceQuestIntroResultPageWidgetState
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  Text(
-                    valueOrDefault<String>(
-                      competenceQuestIntroResultPageCompetenceQuestRecord
-                          ?.foiRespondido
-                          .toString(),
-                      'foi respondido?',
-                    ),
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Readex Pro',
-                          letterSpacing: 0.0,
-                        ),
-                  ),
-                  FFButtonWidget(
-                    onPressed: () async {
-                      await competenceQuestIntroResultPageCompetenceQuestRecord!
-                          .reference
-                          .update(createCompetenceQuestRecordData(
-                        foiRespondido: false,
-                      ));
-                    },
-                    text: 'RESET',
-                    options: FFButtonOptions(
-                      height: 40.0,
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
-                      iconPadding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: FlutterFlowTheme.of(context).primary,
-                      textStyle:
-                          FlutterFlowTheme.of(context).titleSmall.override(
-                                fontFamily: 'Readex Pro',
-                                color: Colors.white,
-                                letterSpacing: 0.0,
-                              ),
-                      elevation: 3.0,
-                      borderSide: const BorderSide(
-                        color: Colors.transparent,
-                        width: 1.0,
-                      ),
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                  ),
                   if (!competenceQuestIntroResultPageCompetenceQuestRecord!
                       .foiRespondido)
                     Expanded(
@@ -215,23 +176,442 @@ class _CompetenceQuestIntroResultPageWidgetState
                   if (competenceQuestIntroResultPageCompetenceQuestRecord
                           .foiRespondido ??
                       true)
-                    Container(
-                      width: double.infinity,
-                      height: 100.0,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                      ),
-                      child: Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
-                        child: Text(
-                          'Parte ainda não implementada, por favor, clique no botão reset para retornar ao estado anterior.',
-                          textAlign: TextAlign.center,
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Readex Pro',
-                                    letterSpacing: 0.0,
+                    Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
+                      child: Container(
+                        width: double.infinity,
+                        height: 1000.0,
+                        decoration: BoxDecoration(
+                          color:
+                              FlutterFlowTheme.of(context).secondaryBackground,
+                        ),
+                        child: SingleChildScrollView(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 20.0, 0.0, 0.0),
+                                child: FFButtonWidget(
+                                  onPressed: () async {
+                                    await competenceQuestIntroResultPageCompetenceQuestRecord
+                                        .reference
+                                        .update(createCompetenceQuestRecordData(
+                                      foiRespondido: false,
+                                    ));
+                                  },
+                                  text: 'Refazer o Teste',
+                                  options: FFButtonOptions(
+                                    height: 40.0,
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        24.0, 0.0, 24.0, 0.0),
+                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 0.0, 0.0),
+                                    color: FlutterFlowTheme.of(context).primary,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          color: Colors.white,
+                                          letterSpacing: 0.0,
+                                        ),
+                                    elevation: 3.0,
+                                    borderSide: const BorderSide(
+                                      color: Colors.transparent,
+                                      width: 1.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8.0),
                                   ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 20.0, 0.0, 0.0),
+                                child: Text(
+                                  'Parte ainda não implementada, por favor, clique no botão reset para retornar ao estado anterior.',
+                                  textAlign: TextAlign.center,
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    10.0, 20.0, 10.0, 20.0),
+                                child: Container(
+                                  width: double.infinity,
+                                  height: 110.0,
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context).accent2,
+                                    borderRadius: BorderRadius.circular(12.0),
+                                    border: Border.all(
+                                      width: 1.0,
+                                    ),
+                                  ),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            10.0, 10.0, 0.0, 10.0),
+                                        child: AuthUserStreamWidget(
+                                          builder: (context) => ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(24.0),
+                                            child: Image.network(
+                                              valueOrDefault<String>(
+                                                currentUserPhoto,
+                                                'https://picsum.photos/seed/986/600',
+                                              ),
+                                              width: 100.0,
+                                              height: 100.0,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    20.0, 20.0, 20.0, 0.0),
+                                            child: RichText(
+                                              textScaler: MediaQuery.of(context)
+                                                  .textScaler,
+                                              text: TextSpan(
+                                                children: [
+                                                  TextSpan(
+                                                    text: 'Nome: ',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primary,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                  ),
+                                                  TextSpan(
+                                                    text:
+                                                        currentUserDisplayName,
+                                                    style: const TextStyle(),
+                                                  )
+                                                ],
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                              ),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    20.0, 0.0, 20.0, 0.0),
+                                            child: RichText(
+                                              textScaler: MediaQuery.of(context)
+                                                  .textScaler,
+                                              text: TextSpan(
+                                                children: [
+                                                  TextSpan(
+                                                    text: 'Idade: ',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primary,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                  ),
+                                                  TextSpan(
+                                                    text: valueOrDefault(
+                                                            currentUserDocument
+                                                                ?.age,
+                                                            0)
+                                                        .toString(),
+                                                    style: const TextStyle(),
+                                                  )
+                                                ],
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                              ),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    20.0, 0.0, 20.0, 0.0),
+                                            child: RichText(
+                                              textScaler: MediaQuery.of(context)
+                                                  .textScaler,
+                                              text: TextSpan(
+                                                children: [
+                                                  TextSpan(
+                                                    text: 'Sexo: ',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primary,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                  ),
+                                                  TextSpan(
+                                                    text: valueOrDefault(
+                                                        currentUserDocument
+                                                            ?.genre,
+                                                        ''),
+                                                    style: const TextStyle(),
+                                                  )
+                                                ],
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                width: double.infinity,
+                                height: 50.0,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                ),
+                                child: RichText(
+                                  textScaler: MediaQuery.of(context).textScaler,
+                                  text: TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text: 'Score: ',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              fontSize: 24.0,
+                                              letterSpacing: 0.0,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                      ),
+                                      TextSpan(
+                                        text: valueOrDefault<String>(
+                                          competenceQuestIntroResultPageCompetenceQuestRecord
+                                              .score
+                                              .toString(),
+                                          '0',
+                                        ),
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 24.0,
+                                        ),
+                                      )
+                                    ],
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          letterSpacing: 0.0,
+                                        ),
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                              Container(
+                                width: double.infinity,
+                                height: 200.0,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                ),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 0.0, 20.0),
+                                      child: Text(
+                                        'Result',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              fontSize: 24.0,
+                                              letterSpacing: 0.0,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                      ),
+                                    ),
+                                    if (competenceQuestIntroResultPageCompetenceQuestRecord
+                                            .score <=
+                                        15)
+                                      Text(
+                                        'Você está no início de sua jornada de desenvolvimento de competências. É importante identificar as áreas em que você precisa de mais foco e buscar oportunidades de aprendizado e crescimento.',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                    if ((competenceQuestIntroResultPageCompetenceQuestRecord
+                                                .score >=
+                                            16) &&
+                                        (competenceQuestIntroResultPageCompetenceQuestRecord
+                                                .score <=
+                                            30))
+                                      Text(
+                                        'Você possui uma boa base de competências, mas ainda há espaço para aprimoramento. Considere participar de treinamentos específicos e buscar feedback para continuar progredindo.',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                    if ((competenceQuestIntroResultPageCompetenceQuestRecord
+                                                .score >=
+                                            31) &&
+                                        (competenceQuestIntroResultPageCompetenceQuestRecord
+                                                .score <=
+                                            45))
+                                      Text(
+                                        'Suas competências estão bem desenvolvidas. Continue aprimorando suas habilidades e expandindo seu conhecimento para se tornar um especialista em sua área.',
+                                        textAlign: TextAlign.justify,
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                    if ((competenceQuestIntroResultPageCompetenceQuestRecord
+                                                .score >=
+                                            46) &&
+                                        (competenceQuestIntroResultPageCompetenceQuestRecord
+                                                .score <=
+                                            60))
+                                      Text(
+                                        'Você demonstra um alto nível de competência em várias áreas. Mantenha-se atualizado com as tendências do setor e explore oportunidades de liderança e inovação para continuar crescendo profissionalmente.',
+                                        textAlign: TextAlign.justify,
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                width: double.infinity,
+                                height: 200.0,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                ),
+                                child: SizedBox(
+                                  width: 370.0,
+                                  height: 230.0,
+                                  child: FlutterFlowLineChart(
+                                    data: [
+                                      FFLineChartData(
+                                        xData: List.generate(
+                                            random_data.randomInteger(10, 20),
+                                            (index) => random_data
+                                                .randomInteger(0, 10)),
+                                        yData: List.generate(
+                                            random_data.randomInteger(10, 20),
+                                            (index) => random_data
+                                                .randomInteger(0, 10)),
+                                        settings: LineChartBarData(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
+                                          barWidth: 2.0,
+                                          isCurved: true,
+                                          dotData: FlDotData(show: false),
+                                          belowBarData: BarAreaData(
+                                            show: true,
+                                            color: FlutterFlowTheme.of(context)
+                                                .accent1,
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                    chartStylingInfo: ChartStylingInfo(
+                                      enableTooltip: true,
+                                      backgroundColor:
+                                          FlutterFlowTheme.of(context)
+                                              .secondaryBackground,
+                                      showGrid: true,
+                                      borderColor: FlutterFlowTheme.of(context)
+                                          .secondaryText,
+                                      borderWidth: 1.0,
+                                    ),
+                                    axisBounds: const AxisBounds(),
+                                    xAxisLabelInfo: const AxisLabelInfo(
+                                      reservedSize: 32.0,
+                                    ),
+                                    yAxisLabelInfo: const AxisLabelInfo(
+                                      reservedSize: 40.0,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),

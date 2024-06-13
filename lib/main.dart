@@ -36,12 +36,13 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   Locale? _locale;
-  ThemeMode _themeMode = FlutterFlowTheme.themeMode;
 
-  late Stream<BaseAuthUser> userStream;
+  ThemeMode _themeMode = FlutterFlowTheme.themeMode;
 
   late AppStateNotifier _appStateNotifier;
   late GoRouter _router;
+
+  late Stream<BaseAuthUser> userStream;
 
   final authUserSub = authenticatedUserStream.listen((_) {});
 
@@ -52,7 +53,9 @@ class _MyAppState extends State<MyApp> {
     _appStateNotifier = AppStateNotifier.instance;
     _router = createRouter(_appStateNotifier);
     userStream = competenceQuestFirebaseUserStream()
-      ..listen((user) => _appStateNotifier.update(user));
+      ..listen((user) {
+        _appStateNotifier.update(user);
+      });
     jwtTokenStream.listen((_) {});
     Future.delayed(
       const Duration(milliseconds: 1000),
@@ -130,7 +133,7 @@ class _NavBarPageState extends State<NavBarPage> {
   Widget build(BuildContext context) {
     final tabs = {
       'HomePage': const HomePageWidget(),
-      'CursosPage': const CursosPageWidget(),
+      'EstudosPage': const EstudosPageWidget(),
       'CompetenceQuestIntroResultPage': const CompetenceQuestIntroResultPageWidget(),
       'PerfilPage': const PerfilPageWidget(),
     };
@@ -156,7 +159,7 @@ class _NavBarPageState extends State<NavBarPage> {
               Icons.home_outlined,
               size: 24.0,
             ),
-            label: 'Inicio',
+            label: 'Home',
             tooltip: '',
           ),
           BottomNavigationBarItem(
@@ -164,7 +167,7 @@ class _NavBarPageState extends State<NavBarPage> {
               Icons.menu_book,
               size: 24.0,
             ),
-            label: 'Crusos',
+            label: 'Estudos',
             tooltip: '',
           ),
           BottomNavigationBarItem(

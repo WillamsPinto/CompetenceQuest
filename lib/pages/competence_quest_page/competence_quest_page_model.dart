@@ -9,12 +9,13 @@ class CompetenceQuestPageModel
 
   final unfocusNode = FocusNode();
   final formKey1 = GlobalKey<FormState>();
-  final formKey5 = GlobalKey<FormState>();
-  final formKey4 = GlobalKey<FormState>();
   final formKey6 = GlobalKey<FormState>();
-  final formKey3 = GlobalKey<FormState>();
-  final formKey2 = GlobalKey<FormState>();
+  final formKey5 = GlobalKey<FormState>();
   final formKey7 = GlobalKey<FormState>();
+  final formKey2 = GlobalKey<FormState>();
+  final formKey4 = GlobalKey<FormState>();
+  final formKey3 = GlobalKey<FormState>();
+  final formKey8 = GlobalKey<FormState>();
   // State field(s) for RadioButton widget.
   FormFieldController<String>? radioButtonValueController1;
   // State field(s) for RadioButton widget.
@@ -23,6 +24,18 @@ class CompetenceQuestPageModel
   FormFieldController<String>? radioButtonValueController3;
   // State field(s) for RadioButton widget.
   FormFieldController<String>? radioButtonValueController4;
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode;
+  TextEditingController? textController;
+  String? Function(BuildContext, String?)? textControllerValidator;
+  String? _textControllerValidator(BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Field is required';
+    }
+
+    return null;
+  }
+
   // State field(s) for RadioButton widget.
   FormFieldController<String>? radioButtonValueController5;
   // State field(s) for RadioButton widget.
@@ -31,11 +44,15 @@ class CompetenceQuestPageModel
   FormFieldController<String>? radioButtonValueController7;
 
   @override
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    textControllerValidator = _textControllerValidator;
+  }
 
   @override
   void dispose() {
     unfocusNode.dispose();
+    textFieldFocusNode?.dispose();
+    textController?.dispose();
   }
 
   /// Additional helper methods.

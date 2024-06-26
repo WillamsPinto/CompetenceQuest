@@ -51,7 +51,7 @@ class QuestionStruct extends FFFirebaseStruct {
   set answersPoints(List<int>? val) => _answersPoints = val;
 
   void updateAnswersPoints(Function(List<int>) updateFn) {
-    updateFn(answersPoints ??= []);
+    updateFn(_answersPoints ??= []);
   }
 
   bool hasAnswersPoints() => _answersPoints != null;
@@ -62,7 +62,7 @@ class QuestionStruct extends FFFirebaseStruct {
   set answers(List<OptionsStruct>? val) => _answers = val;
 
   void updateAnswers(Function(List<OptionsStruct>) updateFn) {
-    updateFn(answers ??= []);
+    updateFn(_answers ??= []);
   }
 
   bool hasAnswers() => _answers != null;

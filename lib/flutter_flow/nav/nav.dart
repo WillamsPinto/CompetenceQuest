@@ -74,18 +74,18 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? const NavBarPage() : const LoginPageWidget(),
+          appStateNotifier.loggedIn ? NavBarPage() : LoginPageWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? const NavBarPage() : const LoginPageWidget(),
+              appStateNotifier.loggedIn ? NavBarPage() : LoginPageWidget(),
         ),
         FFRoute(
           name: 'LoginPage',
           path: '/loginPage',
-          builder: (context, params) => const LoginPageWidget(),
+          builder: (context, params) => LoginPageWidget(),
         ),
         FFRoute(
           name: 'CreateAccountPage',
@@ -102,52 +102,71 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/perfilPage',
           requireAuth: true,
           builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'PerfilPage')
-              : const PerfilPageWidget(),
+              ? NavBarPage(initialPage: 'PerfilPage')
+              : PerfilPageWidget(),
         ),
         FFRoute(
           name: 'AlterarPerfilPage',
           path: '/alterarPerfilPage',
           requireAuth: true,
-          builder: (context, params) => const AlterarPerfilPageWidget(),
+          builder: (context, params) => AlterarPerfilPageWidget(),
         ),
         FFRoute(
           name: 'CompetenceQuestIntroResultPage',
           path: '/competenceQuestIntroResultPage',
           requireAuth: true,
           builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'CompetenceQuestIntroResultPage')
-              : const CompetenceQuestIntroResultPageWidget(),
+              ? NavBarPage(initialPage: 'CompetenceQuestIntroResultPage')
+              : CompetenceQuestIntroResultPageWidget(),
         ),
         FFRoute(
-          name: 'FaleConoscoPage',
-          path: '/faleConoscoPage',
+          name: 'SuportePage',
+          path: '/suportePage',
           requireAuth: true,
-          builder: (context, params) => const FaleConoscoPageWidget(),
+          builder: (context, params) => SuportePageWidget(),
         ),
         FFRoute(
           name: 'EstudosPage',
           path: '/estudosPage',
           requireAuth: true,
           builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'EstudosPage')
-              : const EstudosPageWidget(),
+              ? NavBarPage(initialPage: 'EstudosPage')
+              : EstudosPageWidget(),
         ),
         FFRoute(
           name: 'CompetenceQuestPage',
           path: '/competenceQuestPage',
           requireAuth: true,
-          builder: (context, params) => const CompetenceQuestPageWidget(),
+          builder: (context, params) => CompetenceQuestPageWidget(),
         ),
         FFRoute(
           name: 'HomePage',
           path: '/homePage',
           requireAuth: true,
           builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'HomePage')
-              : const HomePageWidget(),
+              ? NavBarPage(initialPage: 'HomePage')
+              : HomePageWidget(),
+        ),
+        FFRoute(
+          name: 'DetalheCompetenciaPage',
+          path: '/detalheCompetenciaPage',
+          requireAuth: true,
+          builder: (context, params) => DetalheCompetenciaPageWidget(),
+        ),
+        FFRoute(
+          name: 'PDFViewerPage',
+          path: '/pDFViewerPage',
+          requireAuth: true,
+          builder: (context, params) => PDFViewerPageWidget(),
+        ),
+        FFRoute(
+          name: 'WebViewerPage',
+          path: '/webViewerPage',
+          requireAuth: true,
+          builder: (context, params) => WebViewerPageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
+      observers: [routeObserver],
     );
 
 extension NavParamExtensions on Map<String, String?> {
@@ -381,7 +400,7 @@ class TransitionInfo {
   final Duration duration;
   final Alignment? alignment;
 
-  static TransitionInfo appDefault() => const TransitionInfo(hasTransition: false);
+  static TransitionInfo appDefault() => TransitionInfo(hasTransition: false);
 }
 
 class RootPageContext {

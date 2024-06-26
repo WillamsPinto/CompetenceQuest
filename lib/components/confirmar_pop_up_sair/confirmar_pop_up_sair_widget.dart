@@ -61,7 +61,8 @@ class _ConfirmarPopUpSairWidgetState extends State<ConfirmarPopUpSairWidget> {
                   ),
             ),
             Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+              padding:
+                  const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
               child: Text(
                 'Tem certeza que deseja sair?',
                 style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -72,7 +73,8 @@ class _ConfirmarPopUpSairWidgetState extends State<ConfirmarPopUpSairWidget> {
               ),
             ),
             Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(16.0, 24.0, 16.0, 24.0),
+              padding:
+                  const EdgeInsetsDirectional.fromSTEB(16.0, 24.0, 16.0, 24.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -85,10 +87,10 @@ class _ConfirmarPopUpSairWidgetState extends State<ConfirmarPopUpSairWidget> {
                     options: FFButtonOptions(
                       width: 120.0,
                       height: 40.0,
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      iconPadding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      padding: const EdgeInsetsDirectional.fromSTEB(
+                          0.0, 0.0, 0.0, 0.0),
+                      iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                          0.0, 0.0, 0.0, 0.0),
                       color: FlutterFlowTheme.of(context).primary,
                       textStyle:
                           FlutterFlowTheme.of(context).labelMedium.override(
@@ -111,10 +113,10 @@ class _ConfirmarPopUpSairWidgetState extends State<ConfirmarPopUpSairWidget> {
                     options: FFButtonOptions(
                       width: 120.0,
                       height: 40.0,
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      iconPadding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      padding: const EdgeInsetsDirectional.fromSTEB(
+                          0.0, 0.0, 0.0, 0.0),
+                      iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                          0.0, 0.0, 0.0, 0.0),
                       color: FlutterFlowTheme.of(context).primary,
                       textStyle:
                           FlutterFlowTheme.of(context).labelMedium.override(

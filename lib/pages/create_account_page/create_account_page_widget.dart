@@ -8,6 +8,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 import 'create_account_page_model.dart';
 export 'create_account_page_model.dart';
 
@@ -119,15 +120,18 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 16.0),
+                                    padding:
+                                        const EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 0.0, 16.0),
                                     child: SizedBox(
                                       width: 370.0,
                                       child: TextFormField(
                                         controller: _model.nomeTextController,
                                         focusNode: _model.nomeFocusNode,
                                         autofocus: true,
-                                        autofillHints: const [AutofillHints.name],
+                                        autofillHints: const [
+                                          AutofillHints.name
+                                        ],
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           labelText: 'Nome Completo',
@@ -197,15 +201,18 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 16.0),
+                                    padding:
+                                        const EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 0.0, 16.0),
                                     child: SizedBox(
                                       width: 370.0,
                                       child: TextFormField(
                                         controller: _model.idadeTextController,
                                         focusNode: _model.idadeFocusNode,
                                         autofocus: true,
-                                        autofillHints: const [AutofillHints.email],
+                                        autofillHints: const [
+                                          AutofillHints.email
+                                        ],
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           labelText: 'Idade',
@@ -288,8 +295,9 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 16.0),
+                                    padding:
+                                        const EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 0.0, 16.0),
                                     child: FlutterFlowDropDown<String>(
                                       controller: _model.sexoValueController ??=
                                           FormFieldController<String>(null),
@@ -300,7 +308,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                       ],
                                       onChanged: (val) => setState(
                                           () => _model.sexoValue = val),
-                                      width: double.infinity,
+                                      width: 370.0,
                                       height: 56.0,
                                       textStyle: FlutterFlowTheme.of(context)
                                           .bodyMedium
@@ -322,8 +330,9 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                           .alternate,
                                       borderWidth: 2.0,
                                       borderRadius: 8.0,
-                                      margin: const EdgeInsetsDirectional.fromSTEB(
-                                          16.0, 4.0, 16.0, 4.0),
+                                      margin:
+                                          const EdgeInsetsDirectional.fromSTEB(
+                                              16.0, 4.0, 16.0, 4.0),
                                       hidesUnderline: true,
                                       isOverButton: true,
                                       isSearchable: false,
@@ -331,8 +340,9 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 16.0),
+                                    padding:
+                                        const EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 0.0, 16.0),
                                     child: SizedBox(
                                       width: 370.0,
                                       child: TextFormField(
@@ -340,7 +350,9 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                             _model.emailAddressTextController,
                                         focusNode: _model.emailAddressFocusNode,
                                         autofocus: true,
-                                        autofillHints: const [AutofillHints.email],
+                                        autofillHints: const [
+                                          AutofillHints.email
+                                        ],
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           labelText: 'Email',
@@ -412,8 +424,9 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 16.0),
+                                    padding:
+                                        const EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 0.0, 16.0),
                                     child: SizedBox(
                                       width: 370.0,
                                       child: TextFormField(
@@ -421,7 +434,9 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                             _model.passwordTextController,
                                         focusNode: _model.passwordFocusNode,
                                         autofocus: true,
-                                        autofillHints: const [AutofillHints.password],
+                                        autofillHints: const [
+                                          AutofillHints.password
+                                        ],
                                         obscureText: !_model.passwordVisibility,
                                         decoration: InputDecoration(
                                           labelText: 'Senha',
@@ -509,8 +524,9 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 16.0),
+                                    padding:
+                                        const EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 0.0, 16.0),
                                     child: SizedBox(
                                       width: 370.0,
                                       child: TextFormField(
@@ -519,7 +535,9 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                         focusNode:
                                             _model.confirmarpasswordFocusNode,
                                         autofocus: true,
-                                        autofillHints: const [AutofillHints.password],
+                                        autofillHints: const [
+                                          AutofillHints.password
+                                        ],
                                         obscureText:
                                             !_model.confirmarpasswordVisibility,
                                         decoration: InputDecoration(
@@ -686,15 +704,18 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                             const AlignmentDirectional(0.0, 0.0)
                                                 .resolve(
                                                     Directionality.of(context)),
-                                        child: GestureDetector(
-                                          onTap: () => _model
-                                                  .unfocusNode.canRequestFocus
-                                              ? FocusScope.of(context)
-                                                  .requestFocus(
-                                                      _model.unfocusNode)
-                                              : FocusScope.of(context)
-                                                  .unfocus(),
-                                          child: const ConfirmaCadastroWidget(),
+                                        child: WebViewAware(
+                                          child: GestureDetector(
+                                            onTap: () => _model
+                                                    .unfocusNode.canRequestFocus
+                                                ? FocusScope.of(context)
+                                                    .requestFocus(
+                                                        _model.unfocusNode)
+                                                : FocusScope.of(context)
+                                                    .unfocus(),
+                                            child:
+                                                const ConfirmaCadastroWidget(),
+                                          ),
                                         ),
                                       );
                                     },
@@ -709,8 +730,9 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                   height: 44.0,
                                   padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 0.0),
-                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 0.0),
+                                  iconPadding:
+                                      const EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 0.0, 0.0),
                                   color: FlutterFlowTheme.of(context).primary,
                                   textStyle: FlutterFlowTheme.of(context)
                                       .titleSmall

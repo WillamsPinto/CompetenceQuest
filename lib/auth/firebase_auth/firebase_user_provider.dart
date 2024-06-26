@@ -8,7 +8,6 @@ export '../base_auth_user_provider.dart';
 class CompetenceQuestFirebaseUser extends BaseAuthUser {
   CompetenceQuestFirebaseUser(this.user);
   User? user;
-  @override
   bool get loggedIn => user != null;
 
   @override

@@ -1,5 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/backend/firebase_storage/storage.dart';
 import '/components/confirma_atualizacao_perfil/confirma_atualizacao_perfil_widget.dart';
 import '/components/confirmar_pop_up_deletar_conta/confirmar_pop_up_deletar_conta_widget.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
@@ -8,7 +9,10 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
+import '/flutter_flow/upload_data.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 import 'alterar_perfil_page_model.dart';
 export 'alterar_perfil_page_model.dart';
 
@@ -167,31 +171,162 @@ class _AlterarPerfilPageWidgetState extends State<AlterarPerfilPageWidget> {
                                 mainAxisSize: MainAxisSize.max,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(24.0),
-                                    child: Image.network(
-                                      'https://picsum.photos/seed/311/600',
-                                      width: 100.0,
-                                      height: 100.0,
-                                      fit: BoxFit.cover,
+                                  Padding(
+                                    padding:
+                                        const EdgeInsetsDirectional.fromSTEB(
+                                            16.0, 6.0, 16.0, 6.0),
+                                    child: Container(
+                                      width: 93.0,
+                                      height: 93.0,
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .accent1,
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
+                                          width: 2.0,
+                                        ),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(2.0),
+                                        child: AuthUserStreamWidget(
+                                          builder: (context) => ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(50.0),
+                                            child: CachedNetworkImage(
+                                              fadeInDuration: const Duration(
+                                                  milliseconds: 500),
+                                              fadeOutDuration: const Duration(
+                                                  milliseconds: 500),
+                                              imageUrl: valueOrDefault<String>(
+                                                currentUserPhoto,
+                                                'https://icons.veryicon.com/png/o/internet--web/prejudice/user-128.png',
+                                              ),
+                                              width: 300.0,
+                                              height: 200.0,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 12.0, 0.0, 24.0),
+                                    padding:
+                                        const EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 10.0, 0.0, 10.0),
+                                    child: FFButtonWidget(
+                                      onPressed: () async {
+                                        final selectedMedia =
+                                            await selectMediaWithSourceBottomSheet(
+                                          context: context,
+                                          allowPhoto: true,
+                                        );
+                                        if (selectedMedia != null &&
+                                            selectedMedia.every((m) =>
+                                                validateFileFormat(
+                                                    m.storagePath, context))) {
+                                          setState(() =>
+                                              _model.isDataUploading = true);
+                                          var selectedUploadedFiles =
+                                              <FFUploadedFile>[];
+
+                                          var downloadUrls = <String>[];
+                                          try {
+                                            selectedUploadedFiles =
+                                                selectedMedia
+                                                    .map((m) => FFUploadedFile(
+                                                          name: m.storagePath
+                                                              .split('/')
+                                                              .last,
+                                                          bytes: m.bytes,
+                                                          height: m.dimensions
+                                                              ?.height,
+                                                          width: m.dimensions
+                                                              ?.width,
+                                                          blurHash: m.blurHash,
+                                                        ))
+                                                    .toList();
+
+                                            downloadUrls = (await Future.wait(
+                                              selectedMedia.map(
+                                                (m) async => await uploadData(
+                                                    m.storagePath, m.bytes),
+                                              ),
+                                            ))
+                                                .where((u) => u != null)
+                                                .map((u) => u!)
+                                                .toList();
+                                          } finally {
+                                            _model.isDataUploading = false;
+                                          }
+                                          if (selectedUploadedFiles.length ==
+                                                  selectedMedia.length &&
+                                              downloadUrls.length ==
+                                                  selectedMedia.length) {
+                                            setState(() {
+                                              _model.uploadedLocalFile =
+                                                  selectedUploadedFiles.first;
+                                              _model.uploadedFileUrl =
+                                                  downloadUrls.first;
+                                            });
+                                          } else {
+                                            setState(() {});
+                                            return;
+                                          }
+                                        }
+
+                                        await currentUserReference!
+                                            .update(createUserDetailsRecordData(
+                                          photoUrl: _model.uploadedFileUrl,
+                                        ));
+                                      },
+                                      text: 'Alterar Imagem',
+                                      options: FFButtonOptions(
+                                        height: 30.0,
+                                        padding: const EdgeInsetsDirectional
+                                            .fromSTEB(24.0, 0.0, 24.0, 0.0),
+                                        iconPadding: const EdgeInsetsDirectional
+                                            .fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              letterSpacing: 0.0,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                        elevation: 3.0,
+                                        borderSide: const BorderSide(
+                                          color: Colors.transparent,
+                                          width: 1.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding:
+                                        const EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 12.0, 0.0, 24.0),
                                     child: Text(
                                       'Abaixo você pode atualizar as informações pessoais',
                                       style: FlutterFlowTheme.of(context)
                                           .labelMedium
                                           .override(
                                             fontFamily: 'Readex Pro',
+                                            fontSize: 16.0,
                                             letterSpacing: 0.0,
                                           ),
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 16.0),
+                                    padding:
+                                        const EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 0.0, 16.0),
                                     child: AuthUserStreamWidget(
                                       builder: (context) => SizedBox(
                                         width: 370.0,
@@ -199,7 +334,9 @@ class _AlterarPerfilPageWidgetState extends State<AlterarPerfilPageWidget> {
                                           controller: _model.nomeTextController,
                                           focusNode: _model.nomeFocusNode,
                                           autofocus: true,
-                                          autofillHints: const [AutofillHints.name],
+                                          autofillHints: const [
+                                            AutofillHints.name
+                                          ],
                                           obscureText: false,
                                           decoration: InputDecoration(
                                             labelText: 'Nome Completo',
@@ -270,8 +407,9 @@ class _AlterarPerfilPageWidgetState extends State<AlterarPerfilPageWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 16.0),
+                                    padding:
+                                        const EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 0.0, 16.0),
                                     child: AuthUserStreamWidget(
                                       builder: (context) => SizedBox(
                                         width: 370.0,
@@ -280,7 +418,9 @@ class _AlterarPerfilPageWidgetState extends State<AlterarPerfilPageWidget> {
                                               _model.idadeTextController,
                                           focusNode: _model.idadeFocusNode,
                                           autofocus: true,
-                                          autofillHints: const [AutofillHints.email],
+                                          autofillHints: const [
+                                            AutofillHints.email
+                                          ],
                                           obscureText: false,
                                           decoration: InputDecoration(
                                             labelText: 'Idade',
@@ -352,8 +492,9 @@ class _AlterarPerfilPageWidgetState extends State<AlterarPerfilPageWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 16.0),
+                                    padding:
+                                        const EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 0.0, 16.0),
                                     child: AuthUserStreamWidget(
                                       builder: (context) =>
                                           FlutterFlowDropDown<String>(
@@ -393,8 +534,8 @@ class _AlterarPerfilPageWidgetState extends State<AlterarPerfilPageWidget> {
                                                 .alternate,
                                         borderWidth: 2.0,
                                         borderRadius: 8.0,
-                                        margin: const EdgeInsetsDirectional.fromSTEB(
-                                            16.0, 4.0, 16.0, 4.0),
+                                        margin: const EdgeInsetsDirectional
+                                            .fromSTEB(16.0, 4.0, 16.0, 4.0),
                                         hidesUnderline: true,
                                         isOverButton: true,
                                         isSearchable: false,
@@ -404,8 +545,9 @@ class _AlterarPerfilPageWidgetState extends State<AlterarPerfilPageWidget> {
                                   ),
                                   Builder(
                                     builder: (context) => Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 140.0, 0.0, 16.0),
+                                      padding:
+                                          const EdgeInsetsDirectional.fromSTEB(
+                                              0.0, 140.0, 0.0, 16.0),
                                       child: FFButtonWidget(
                                         onPressed: () async {
                                           await currentUserReference!.update(
@@ -424,21 +566,25 @@ class _AlterarPerfilPageWidgetState extends State<AlterarPerfilPageWidget> {
                                                 insetPadding: EdgeInsets.zero,
                                                 backgroundColor:
                                                     Colors.transparent,
-                                                alignment: const AlignmentDirectional(
-                                                        0.0, 0.0)
-                                                    .resolve(Directionality.of(
-                                                        context)),
-                                                child: GestureDetector(
-                                                  onTap: () => _model
-                                                          .unfocusNode
-                                                          .canRequestFocus
-                                                      ? FocusScope.of(context)
-                                                          .requestFocus(_model
-                                                              .unfocusNode)
-                                                      : FocusScope.of(context)
-                                                          .unfocus(),
-                                                  child:
-                                                      const ConfirmaAtualizacaoPerfilWidget(),
+                                                alignment:
+                                                    const AlignmentDirectional(
+                                                            0.0, 0.0)
+                                                        .resolve(
+                                                            Directionality.of(
+                                                                context)),
+                                                child: WebViewAware(
+                                                  child: GestureDetector(
+                                                    onTap: () => _model
+                                                            .unfocusNode
+                                                            .canRequestFocus
+                                                        ? FocusScope.of(context)
+                                                            .requestFocus(_model
+                                                                .unfocusNode)
+                                                        : FocusScope.of(context)
+                                                            .unfocus(),
+                                                    child:
+                                                        const ConfirmaAtualizacaoPerfilWidget(),
+                                                  ),
                                                 ),
                                               );
                                             },
@@ -448,12 +594,11 @@ class _AlterarPerfilPageWidgetState extends State<AlterarPerfilPageWidget> {
                                         options: FFButtonOptions(
                                           width: 370.0,
                                           height: 44.0,
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 0.0),
+                                          padding: const EdgeInsetsDirectional
+                                              .fromSTEB(0.0, 0.0, 0.0, 0.0),
                                           iconPadding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 0.0),
+                                              const EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 0.0, 0.0, 0.0),
                                           color: FlutterFlowTheme.of(context)
                                               .primary,
                                           textStyle:
@@ -487,20 +632,24 @@ class _AlterarPerfilPageWidgetState extends State<AlterarPerfilPageWidget> {
                                               backgroundColor:
                                                   Colors.transparent,
                                               alignment:
-                                                  const AlignmentDirectional(0.0, 0.0)
+                                                  const AlignmentDirectional(
+                                                          0.0, 0.0)
                                                       .resolve(
                                                           Directionality.of(
                                                               context)),
-                                              child: GestureDetector(
-                                                onTap: () => _model.unfocusNode
-                                                        .canRequestFocus
-                                                    ? FocusScope.of(context)
-                                                        .requestFocus(
-                                                            _model.unfocusNode)
-                                                    : FocusScope.of(context)
-                                                        .unfocus(),
-                                                child:
-                                                    const ConfirmarPopUpDeletarContaWidget(),
+                                              child: WebViewAware(
+                                                child: GestureDetector(
+                                                  onTap: () => _model
+                                                          .unfocusNode
+                                                          .canRequestFocus
+                                                      ? FocusScope.of(context)
+                                                          .requestFocus(_model
+                                                              .unfocusNode)
+                                                      : FocusScope.of(context)
+                                                          .unfocus(),
+                                                  child:
+                                                      const ConfirmarPopUpDeletarContaWidget(),
+                                                ),
                                               ),
                                             );
                                           },
@@ -510,11 +659,10 @@ class _AlterarPerfilPageWidgetState extends State<AlterarPerfilPageWidget> {
                                       options: FFButtonOptions(
                                         width: 370.0,
                                         height: 44.0,
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 0.0, 0.0),
-                                        iconPadding:
-                                            const EdgeInsetsDirectional.fromSTEB(
-                                                0.0, 0.0, 0.0, 0.0),
+                                        padding: const EdgeInsetsDirectional
+                                            .fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                        iconPadding: const EdgeInsetsDirectional
+                                            .fromSTEB(0.0, 0.0, 0.0, 0.0),
                                         color: const Color(0xFFFF0101),
                                         textStyle: FlutterFlowTheme.of(context)
                                             .titleSmall

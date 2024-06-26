@@ -7,6 +7,11 @@ class AlterarPerfilPageModel extends FlutterFlowModel<AlterarPerfilPageWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
+  bool isDataUploading = false;
+  FFUploadedFile uploadedLocalFile =
+      FFUploadedFile(bytes: Uint8List.fromList([]));
+  String uploadedFileUrl = '';
+
   // State field(s) for nome widget.
   FocusNode? nomeFocusNode;
   TextEditingController? nomeTextController;

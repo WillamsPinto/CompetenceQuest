@@ -59,7 +59,8 @@ class _ConfirmaCadastroWidgetState extends State<ConfirmaCadastroWidget> {
                   ),
             ),
             Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(16.0, 10.0, 16.0, 0.0),
+              padding:
+                  const EdgeInsetsDirectional.fromSTEB(16.0, 10.0, 16.0, 0.0),
               child: Text(
                 'Seu cadastro foi realizado com sucesso!',
                 style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -70,7 +71,8 @@ class _ConfirmaCadastroWidgetState extends State<ConfirmaCadastroWidget> {
               ),
             ),
             Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(16.0, 100.0, 0.0, 0.0),
+              padding:
+                  const EdgeInsetsDirectional.fromSTEB(16.0, 100.0, 0.0, 0.0),
               child: FFButtonWidget(
                 onPressed: () async {
                   Navigator.pop(context);
@@ -79,7 +81,8 @@ class _ConfirmaCadastroWidgetState extends State<ConfirmaCadastroWidget> {
                 options: FFButtonOptions(
                   width: 160.0,
                   height: 50.0,
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                   iconPadding:
                       const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                   color: FlutterFlowTheme.of(context).primary,

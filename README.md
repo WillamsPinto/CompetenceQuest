@@ -1,7 +1,7 @@
 
 # Competence Quest
 
-<img src="/assets/img/logo.png">
+<img src="assets/images/logo.png">
 
 Projeto desenvolvido para cumprimento da disciplina de fundamentos de programação aplicada no programa de pós-graduação em informática.
 
